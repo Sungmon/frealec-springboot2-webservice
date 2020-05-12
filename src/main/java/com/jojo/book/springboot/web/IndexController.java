@@ -1,6 +1,8 @@
 package com.jojo.book.springboot.web;
 
+import com.jojo.book.springboot.config.auth.LoginUser;
 import com.jojo.book.springboot.config.auth.dto.SessionUser;
+import com.jojo.book.springboot.domain.user.User;
 import com.jojo.book.springboot.service.posts.PostsService;
 import com.jojo.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +22,8 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String Index(Model model) {
+    public String Index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if(user != null){
             model.addAttribute("userName", user.getName());
         }
