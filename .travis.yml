@@ -8,6 +8,7 @@ branches:
 
 before_install:
   - chmod +x gradlew
+  - git submodule update --init --recursive
 
 # Travis CI 서버의 Home
 cache:
