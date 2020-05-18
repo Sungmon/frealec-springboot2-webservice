@@ -24,7 +24,7 @@ before_deploy:
     - mv frealec-springboot2-webservice.zip deploy/frealec-springboot2-webservice.zip
 
 deploy:
-  -provider: s3
+  - provider: s3
   access_key_id: $AWS_ACCESS_KEY # Travis repo settings
   secret_access_key: $AWS_SECRET_KEY # ""
   bucket: frealec-springboot-build #S3 버킷
