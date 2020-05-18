@@ -24,20 +24,7 @@ before_deploy:
     - mv frealec-springboot2-webservice.zip deploy/frealec-springboot2-webservice.zip
 
 deploy:
-  - access_key_id: $AWS_ACCESS_KEY # Travis repo settings
-    secret_access_key: $AWS_SECRET_KEY # ""
-    bucket: frealec-springboot-build #S3 버킷
-    provider: s3
-#  access_key_id: $AWS_ACCESS_KEY # Travis repo settings
-#  secret_access_key: $AWS_SECRET_KEY # ""
-#  bucket: frealec-springboot-build #S3 버킷
-  region: ap-northeast-2
-  skip_cleanup: true
-  acl: private
-  local_dir: deploy #before_deploy에서 생성한 디렉토리
-  wait-intil-deployed: true
-
-- provider: codedeploy
+  - provider: codedeploy
   access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
   secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
   bucket: frealec-springboot-build #S3 버킷
@@ -47,6 +34,17 @@ deploy:
   deployment_group: frealec-springboot2-webservice # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
   region: ap-northeast-2
   wait-until-deployed: true
+    -
+  - provider: s3
+  access_key_id: $AWS_ACCESS_KEY # Travis repo settings
+  secret_access_key: $AWS_SECRET_KEY # ""
+  bucket: frealec-springboot-build #S3 버킷
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: private
+  local_dir: deploy #before_deploy에서 생성한 디렉토리
+  wait-intil-deployed: true
+
 
 # CI 실행 완료시 메일로 알람
 notifications:
