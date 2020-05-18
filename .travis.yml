@@ -20,21 +20,21 @@ cache:
 script: "./gradlew clean build"
 
 
-#before_deploy:
-#  - zip -r frealec-springboot2-webservice *
-#  - mkdir -p deploy
-#  - mv frealec-springboot2-webservice.zip deploy/frealec-springboot2-webservice.zip
-#
-#deploy:
-#  - provider: s3
-#  access_key_id: $AWS_ACCESS_KEY # Travis repo settings
-#  secret_access_key: $AWS_SECRET_KEY # ""
-#  bucket: frealec-springboot-build #S3 버킷
-#  region: ap-northeast-2
-#  skip_cleanup: true
-#  acl: private
-#  local_dir: deploy #before_deploy에서 생성한 디렉토리
-#  wait-until-deployed: true #travis
+before_deploy:
+  - zip -r frealec-springboot2-webservice *
+  - mkdir -p deploy
+  - mv frealec-springboot2-webservice.zip deploy/frealec-springboot2-webservice.zip
+
+deploy:
+  - provider: s3
+  access_key_id: $AWS_ACCESS_KEY # Travis repo settings
+  secret_access_key: $AWS_SECRET_KEY # ""
+  bucket: frealec-springboot-build #S3 버킷
+  region: ap-northeast-2
+  skip_cleanup: true
+  acl: private
+  local_dir: deploy #before_deploy에서 생성한 디렉토리
+  wait-until-deployed: true #travis
 
 #  - provider: codedeploy
 #  access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
